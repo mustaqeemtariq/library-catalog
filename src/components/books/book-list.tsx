@@ -38,7 +38,7 @@ export const BookList = () => {
         <label htmlFor="filter">Filter</label>
         <Input name="filter" placeholder="filter books by title" onChange={(event) => setSearchText(event.target.value)} />
       </div>
-      <div className="text-center">
+      <div className="text-center space-y-1">
       {filteredBooks.length > 0 ? (
         filteredBooks.map((book) => (
           <div key={book.title}>
