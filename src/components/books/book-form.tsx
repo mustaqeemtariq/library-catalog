@@ -1,14 +1,8 @@
 import { Input } from '../inputs/input'
-import { useForm } from 'react-hook-form'
 import './styles/form.css'
+import { FormEventHandler } from 'react';
 
 export const BookForm = () => {
-
-    const {
-        register, handleSubmit, formState: {errors} 
-    } = useForm<Book>({
-        mode: "all"
-    })
 
     const existingBooks = localStorage.getItem('books');
     let booksArray = [] as Book[];
@@ -17,7 +11,22 @@ export const BookForm = () => {
       booksArray = JSON.parse(existingBooks);
     }
 
-    const handleFormSubmit = (data: Book) => {
+    const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+        event.preventDefault()
+
+        const form = event.currentTarget
+        const elements = form.elements as HTMLFormControlsCollection;
+
+        const titleInput = elements.namedItem('title') as HTMLInputElement;
+        const authorInput = elements.namedItem('author') as HTMLInputElement;
+        const priceInput = elements.namedItem('price') as HTMLInputElement;
+      
+        const data: Book = {
+          title: titleInput.value,
+          author: authorInput.value,
+          price: priceInput.value,
+        }
+      
         booksArray.push(data)
         localStorage.setItem('books', JSON.stringify(booksArray))
         window.location.reload()
@@ -25,10 +34,10 @@ export const BookForm = () => {
 
   return (
     <div>
-        <form onSubmit={handleSubmit(handleFormSubmit)} className='book-form-main'>
-            <Input placeholder='Title' required type='text' name='title' register={register} errors={errors} />
-            <Input placeholder='Author' required type='text' name='author' register={register} errors={errors} />
-            <Input placeholder='Price' required type='number' name='price' register={register} errors={errors} />
+        <form onSubmit={handleFormSubmit} className='book-form-main'>
+            <Input placeholder='Title' required type='text' name='title' />
+            <Input placeholder='Author' required type='text' name='author' />
+            <Input placeholder='Price' required type='number' name='price' />
             <button>Add Book</button>
         </form>
     </div>
