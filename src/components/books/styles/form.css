@@ -1,0 +1,44 @@
+.book-form-main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+
+.book-form-main button {
+    width: 100%;
+    padding: 8px 16px;
+    color: white;
+    background-color: rgb(155, 117, 182);
+    border: none;
+}
+
+.book-form-main button:hover {
+    background-color: rgb(153, 99, 192);
+}
+
+.input-main-container {
+    width: 100%;
+}
+
+.input-main-container > div {
+    margin-top: 4px;
+}
+
+.input-main-container input {
+    border-radius: 4px;
+    width: 100%;
+    border: 1px solid gray;
+    padding: 12px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.input-main-container input:focus {
+    outline: none;
+    border: 2px solid rgb(155, 117, 182);
+}
+
+.input-main-container .error {
+    font-size: 12px;
+    line-height: 16px;
+    color: red;
+}

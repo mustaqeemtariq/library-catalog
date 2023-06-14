@@ -1,0 +1,25 @@
+.book-list-main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.book-list-main > h1 {
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.book-list-sub {
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+}
+
+.book-list-map {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
