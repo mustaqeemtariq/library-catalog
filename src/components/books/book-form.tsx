@@ -15,11 +15,11 @@ export const BookForm = () => {
         event.preventDefault()
 
         const form = event.currentTarget
-        const elements = form.elements as HTMLFormControlsCollection;
+        const elements = form.elements as HTMLFormControlsCollection
 
-        const titleInput = elements.namedItem('title') as HTMLInputElement;
-        const authorInput = elements.namedItem('author') as HTMLInputElement;
-        const priceInput = elements.namedItem('price') as HTMLInputElement;
+        const titleInput = elements.namedItem('title') as HTMLInputElement
+        const authorInput = elements.namedItem('author') as HTMLInputElement
+        const priceInput = elements.namedItem('price') as HTMLInputElement
       
         const data: Book = {
           title: titleInput.value,

@@ -14,6 +14,7 @@
 
 .book-form-main button:hover {
     background-color: rgb(153, 99, 192);
+    cursor: pointer;
 }
 
 .input-main-container {
