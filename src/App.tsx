@@ -1,6 +1,5 @@
-import React from 'react';
-import { BookCatalog } from './components/books/book-catalog';
-import { Container } from './components/container/container';
+import { BookCatalog } from './components/books/book-catalog'
+import { Container } from './components/container/container'
 
 const App = () => {
   return (
