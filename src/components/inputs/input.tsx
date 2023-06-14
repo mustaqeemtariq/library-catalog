@@ -16,6 +16,7 @@ export const Input = ({
   label,
   name,
   register,
+  required,
   type,
   onChange,
   placeholder,
@@ -28,6 +29,7 @@ export const Input = ({
         <div>
           <input
             {...(register?.(name) ?? {})}
+            required={required}
             type={type}
             name={name}
             onChange={onChange}
