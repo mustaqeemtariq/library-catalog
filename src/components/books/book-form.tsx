@@ -2,9 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Input } from '../inputs/input'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { useAppDispatch } from '../../hooks/rtk'
-import { addBook } from '../../slices/books'
-import toast from 'react-hot-toast'
+import './styles/form.css'
 
 export const BookForm = () => {
     const schema = yup.object<Book>().shape({
@@ -14,27 +12,32 @@ export const BookForm = () => {
     })
 
     const {
-        register, handleSubmit, reset, formState: {errors} 
+        register, handleSubmit, formState: {errors} 
     } = useForm<Book>({
         resolver: yupResolver(schema),
         mode: "all"
     })
 
-    const dispatch = useAppDispatch()
+    const existingBooks = localStorage.getItem('books');
+    let booksArray = [] as Book[];
+  
+    if (existingBooks) {
+      booksArray = JSON.parse(existingBooks);
+    }
 
     const handleFormSubmit = (data: Book) => {
-        dispatch(addBook(data))
-        toast.success("Book added successfully")
-        reset()
+        booksArray.push(data)
+        localStorage.setItem('books', JSON.stringify(booksArray))
+        window.location.reload()
     }
 
   return (
     <div>
-        <form onSubmit={handleSubmit(handleFormSubmit)} className='space-y-3'>
+        <form onSubmit={handleSubmit(handleFormSubmit)} className='book-form-main'>
             <Input placeholder='Title' type='text' name='title' register={register} errors={errors} />
             <Input placeholder='Author' type='text' name='author' register={register} errors={errors} />
             <Input placeholder='Price' type='number' name='price' register={register} errors={errors} />
-            <button className='w-full px-4 py-2 text-white rounded-md bg-indigo-500 hover:bg-indigo-600'>Add Book</button>
+            <button>Add Book</button>
         </form>
     </div>
   )

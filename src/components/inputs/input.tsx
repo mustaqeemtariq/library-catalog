@@ -4,7 +4,7 @@ import {
   FieldErrors,
   FieldValues,
 } from "react-hook-form/dist/types";
-
+import "../books/styles/form.css"
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
@@ -23,19 +23,18 @@ export const Input = ({
 }: InputProps) => {
   const errorText = errors?.[name]?.message as string;
   return (
-    <div className="w-full">
+    <div className="input-main-container">
         {label && <label htmlFor={name}>{label}</label>}
-        <div className="mt-1">
+        <div>
           <input
             {...(register?.(name) ?? {})}
             type={type}
             name={name}
             onChange={onChange}
             placeholder={placeholder}
-            className="rounded border w-full border-gray-300 p-3 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
           />
       </div>
-      {errorText && <p className="text-xs text-red-600">{errorText}</p>}
+      {errorText && <p className="error">{errorText}</p>}
     </div>
   );
 };

@@ -1,11 +1,12 @@
 import { useState, useMemo } from "react";
 import { Input } from "../inputs/input";
-import { useAppSelector } from "../../hooks/rtk";
+import "./styles/list.css"
 
 export const BookList = () => {
   const [searchText, setSearchText] = useState('')
-  const { books } = useAppSelector((state) => state.books)
-
+  const storedBooks = localStorage.getItem('books');
+  const books: Book[] = useMemo(() =>storedBooks ? JSON.parse(storedBooks) : [], [storedBooks])
+  
   const { filteredBooks } = useMemo(() => {		
 		const { filteredBooks } = books.reduce(
 			(prev, curr) => {
@@ -15,7 +16,6 @@ export const BookList = () => {
 						curr.author?.toLowerCase().includes(searchText.toLowerCase()) ||
 						curr.price?.includes(searchText)
 					) {
-						
 						return { filteredBooks: [...prev.filteredBooks, curr] }
 					}
 				} else {
@@ -32,13 +32,13 @@ export const BookList = () => {
 	}, [books, searchText])
 
   return (
-    <div className="space-y-5">
-      <h1 className="text-xl font-bold text-center">Book Catalog</h1>
-      <div className="flex space-x-2 items-center">
+    <div className="book-list-main">
+      <h1>Book Catalog</h1>
+      <div className="book-list-sub">
         <label htmlFor="filter">Filter</label>
         <Input name="filter" placeholder="filter books by title" onChange={(event) => setSearchText(event.target.value)} />
       </div>
-      <div className="text-center space-y-1">
+      <div className="book-list-map">
       {filteredBooks.length > 0 ? (
         filteredBooks.map((book) => (
           <div key={book.title}>
@@ -52,5 +52,5 @@ export const BookList = () => {
       )}
       </div>
     </div>
-  );
-};
+  )
+}
